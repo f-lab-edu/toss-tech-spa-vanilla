@@ -274,3 +274,63 @@ a {
 .sidebar__tag-item:hover {
   background-color: var(--gray200);
 }
+
+/* 상세 페이지  */
+.detail-main-content {
+  padding: 20px;
+  max-width: 700px;
+  margin: 80px auto 0 auto;
+}
+
+.detail-post__cover {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.detail-post__img {
+  width: 100%;
+  border-radius: 16px;
+}
+
+.detail-post__title {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 15px;
+  color: var(--gray600);
+}
+
+.detail-post__info {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+  color: var(--gray400);
+  font-size: 14px;
+}
+
+.detail-post__author {
+  color: var(--gray500);
+}
+
+.detail-post__content p {
+  margin: 54px auto 20px auto;
+  font-size: 18px;
+}
+
+.detail-post__tags {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.detail-post__tag {
+  background-color: #f2f4f6;
+  border-radius: 12px;
+  padding: 5px 10px;
+  font-size: 14px;
+  color: #007aff;
+}
+
+.detail-post__tag:hover {
+  background-color: #e0e0e0;
+}
