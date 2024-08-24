@@ -97,7 +97,8 @@ a {
   display: flex;
   flex-wrap: wrap;
   padding: 20px;
-  margin-top: 50px;
+  margin: 50px auto;
+  width: 1000px;
 }
 
 /* 배너 */
@@ -150,10 +151,12 @@ a {
 .tabs__item {
   padding: 10px 20px;
   cursor: pointer;
+  color: var(--gray500);
 }
 
 .tabs__item--active {
   border-bottom: 2px solid var(--black100);
+  color: var(--black100);
 }
 
 /* 블로그 포스트 */
@@ -197,10 +200,13 @@ a {
   height: 90px;
   overflow: hidden;
   border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .post__img {
-  width: 100%;
+  width: 110%;
   height: 100%;
   transition: transform 0.3s ease;
 }
@@ -239,7 +245,7 @@ a {
 .sidebar__item a {
   text-decoration: none;
   color: var(--black100);
-  font-size: 16px;
+  font-size: 15px;
   transition: color 0.3s ease;
 }
 
@@ -268,7 +274,7 @@ a {
   background-color: var(--gray100);
   border-radius: 20px;
   padding: 5px 10px;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .sidebar__tag-item:hover {
