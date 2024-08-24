@@ -1,6 +1,32 @@
+:root {
+  --blue100: #007aff;
+  --blue200: #3182f6;
+  --blue300: #2769d8;
+
+  --gray100: #f2f4f6;
+  --gray200: #e0e0e0;
+  --gray300: #ddd;
+  --gray400: #888;
+  --gray500: #4e5968;
+  --gray600: #333;
+
+  --black100: #191f28;
+
+  --background-dark: #212945;
+  --background-light: #f9f9f9;
+}
+
 body {
   box-sizing: border-box;
+  line-height: 1.6;
 }
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* 헤더 */
 .header {
   display: flex;
   justify-content: space-between;
@@ -15,10 +41,6 @@ body {
 
 .header__nav {
   display: flex;
-}
-
-.header__list {
-  display: flex;
   gap: 20px;
   list-style: none;
   padding: 0;
@@ -32,7 +54,7 @@ body {
 
 .header__link {
   text-decoration: none;
-  color: #333;
+  color: var(--black100);
   font-size: 16px;
   padding: 5px 10px;
 }
@@ -45,32 +67,33 @@ body {
 }
 
 .header__button--subscribe {
-  background-color: #3182f6;
-  border: 1px solid #3182f6;
+  background-color: var(--blue200);
+  border: 1px solid var(--blue200);
   color: white;
 }
 
 .header__button--hire {
-  background-color: #f2f4f6;
-  border: 1px solid #f2f4f6;
-  color: #4e5986;
+  background-color: var(--gray100);
+  border: 1px solid var(--gray100);
+  color: var(--gray500);
 }
 
 .header__button--subscribe:hover {
-  background-color: #2769d8;
+  background-color: var(--blue300);
 }
 
 .header__button--hire:hover {
-  background-color: #e0e3e8;
+  background-color: var(--gray200);
 }
 
-main {
+.main {
   display: flex;
   flex-wrap: wrap;
   padding: 20px;
 }
 
-.banner {
+/* 배너 */
+.main__banner {
   width: 100%;
   height: 130px;
   background-color: #212945;
@@ -80,10 +103,166 @@ main {
   align-items: center;
   overflow: hidden;
   position: relative;
+  margin: 24px 17px 40px 17px;
 }
 
-.banner__img {
+.main__banner__img {
   width: 65%;
   height: 130px;
   object-fit: cover;
+}
+
+/* 콘텐츠와 사이드바 */
+.main__contents {
+  display: flex;
+  justify-content: space-evenly;
+  min-height: 50px;
+}
+
+.main__posts {
+  flex: 2.2;
+  padding: 0 24px;
+  margin-bottom: 60px;
+  border-right: 1px solid var(--gray300);
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* 콘텐츠 탭 */
+.tabs {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+  border-bottom: 1px solid var(--gray100);
+}
+
+.tabs__item {
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.tabs__item--active {
+  border-bottom: 2px solid var(--black100);
+}
+
+/* 블로그 포스트 */
+.post {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.post-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.post__content {
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+}
+.post__title {
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 7px;
+}
+.post-link:hover .post__title {
+  color: var(--blue200);
+}
+
+.post__description {
+  font-size: 15px;
+  margin-bottom: 17px;
+  color: var(--gray500);
+}
+.post__info {
+  font-size: 13px;
+  color: var(--gray500);
+}
+
+.post__img-wrapper {
+  width: 130px;
+  height: 90px;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.post__img {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease;
+}
+
+.post-link:hover .post__img {
+  transform: scale(1.2);
+}
+
+/* 사이드바 */
+.main__sidebar {
+  flex: 1;
+  padding: 20px;
+}
+
+.sidebar__title {
+  color: var(--gray400);
+  font-weight: 600;
+  font-size: 13px;
+  margin-bottom: 15px;
+}
+
+.sidebar__section {
+  margin-bottom: 30px;
+}
+
+.sidebar__list,
+.sidebar__tags-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.sidebar__item {
+  margin-bottom: 15px;
+}
+
+.sidebar__item a {
+  text-decoration: none;
+  color: var(--black100);
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.sidebar__item a:hover {
+  color: var(--blue100);
+}
+
+.sidebar__item-title {
+  display: block;
+  font-weight: 500;
+}
+
+.sidebar__author {
+  font-size: 14px;
+  color: var(--gray400);
+  margin-top: 3px;
+}
+
+.sidebar__tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.sidebar__tag-item {
+  background-color: var(--gray100);
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+.sidebar__tag-item:hover {
+  background-color: var(--gray200);
 }
