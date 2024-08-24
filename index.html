@@ -14,16 +14,14 @@
     />
     <title>토스 기술 블로그, 토스 테크</title>
     <link rel="stylesheet" href="src/styles.css" />
+    <script type="module" src="src/index.js"></script>
   </head>
   <body>
     <div id="app">
       <header class="header">
-        <img
-          src="public/logo.svg"
-          alt="Logo"
-          class="header__logo"
-          height="20px"
-        />
+        <a href="/" class="header__logo-link">
+          <img src="/logo.svg" alt="Logo" class="header__logo" />
+        </a>
         <ul class="header__nav">
           <li class="header__item">
             <a class="header__link" href="SLASH">SLASH</a>
@@ -49,7 +47,6 @@
             src="public/toss-tech-banner2_.webp"
             alt="main__banner"
             class="main__banner__img"
-            height="20px"
           />
         </div>
         <div class="main__contents">
@@ -170,6 +167,5 @@
       </main>
       <footer></footer>
     </div>
-    <script type="module" src="src/index.js"></script>
   </body>
 </html>

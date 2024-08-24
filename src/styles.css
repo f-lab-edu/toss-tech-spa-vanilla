@@ -16,8 +16,11 @@
   --background-light: #f9f9f9;
 }
 
-body {
+* {
   box-sizing: border-box;
+}
+
+body {
   line-height: 1.6;
 }
 
