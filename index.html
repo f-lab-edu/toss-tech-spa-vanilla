@@ -1,5 +1,5 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <link
@@ -13,9 +13,159 @@
       href="https://cdn.jsdelivr.net/npm/reset-css/reset.css"
     />
     <title>토스 기술 블로그, 토스 테크</title>
+    <link rel="stylesheet" href="src/styles.css" />
+    <script type="module" src="src/index.js"></script>
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="index.js"></script>
+    <div id="app">
+      <header class="header">
+        <a href="/" class="header__logo-link">
+          <img src="/logo.svg" alt="Logo" class="header__logo" />
+        </a>
+        <ul class="header__nav">
+          <li class="header__item">
+            <a class="header__link" href="SLASH">SLASH</a>
+          </li>
+          <li class="header__item">
+            <a class="header__link" href="simplicity">SIMPLICITY</a>
+          </li>
+          <li class="header__item">
+            <button class="header__button header__button--subscribe">
+              구독하기
+            </button>
+          </li>
+          <li class="header__item">
+            <button class="header__button header__button--hire">
+              채용 바로가기
+            </button>
+          </li>
+        </ul>
+      </header>
+      <main class="main">
+        <div class="main__banner">
+          <img
+            src="public/toss-tech-banner2_.webp"
+            alt="main__banner"
+            class="main__banner__img"
+          />
+        </div>
+        <div class="main__contents">
+          <section class="main__posts">
+            <ul class="tabs">
+              <li class="tabs__item tabs__item--active">전체</li>
+              <li class="tabs__item">개발</li>
+              <li class="tabs__item">디자인</li>
+            </ul>
+            <a href="post-url.html" class="post-link">
+              <article class="post">
+                <div class="post__content">
+                  <h2 class="post__title">
+                    다이내믹 스크래핑과 전월세대출 이동제의 실행
+                  </h2>
+                  <p class="post__description">
+                    토스뱅크에서 전월세대출과 대환 프로세스를 만들면서 겪은
+                    어려움을 해결한 방법을 공유합니다.
+                  </p>
+                  <p class="post__info">2024년 8월 21일 · 조민국</p>
+                </div>
+                <div class="post__img-wrapper">
+                  <img
+                    src="https://static.toss.im/career-resource/0813_%ED%85%8C%ED%81%AC%EB%B8%94%EB%A1%9C%EA%B7%B8_%EC%8D%B8%EB%84%A4%EC%9D%BC2.png"
+                    alt="Post Image"
+                    class="post__img"
+                  />
+                </div>
+              </article>
+            </a>
+            <a href="post-url.html" class="post-link">
+              <article class="post">
+                <div class="post__content">
+                  <h2 class="post__title">
+                    전세대출에서 대외기관 신용정보를 조회하는 방법
+                  </h2>
+                  <p class="post__description">
+                    토스뱅크에서 대외기관을 통해 신용정보를 가져오는 과정을
+                    개선한 경험을 소개합니다.
+                  </p>
+                  <p class="post__info">2024년 8월 20일 · 김동우</p>
+                </div>
+                <div class="post__img-wrapper">
+                  <img
+                    src="https://static.toss.im/career-resource/0813_%ED%85%8C%ED%81%AC%EB%B8%94%EB%A1%9C%EA%B7%B8_%EC%8D%B8%EB%84%A4%EC%9D%BC2.png"
+                    alt="Post Image"
+                    class="post__img"
+                  />
+                </div>
+              </article>
+            </a>
+            <a href="post-url.html" class="post-link">
+              <article class="post">
+                <div class="post__content">
+                  <h2 class="post__title">
+                    Node.js 라이브러리 배포 파이프라인에 플러그인 시스템 도입기
+                  </h2>
+                  <p class="post__description">
+                    100개가 넘는 라이브러리를 관리하면서 마주했던 문제들을
+                    플러그인 시스템으로 풀어낸 방법을 공유합니다.
+                  </p>
+                  <p class="post__info">2024년 8월 14일 · 장지훈</p>
+                </div>
+                <div class="post__img-wrapper">
+                  <img
+                    src="https://static.toss.im/illusts-content/tech-0812-cover3.png"
+                    alt="Post Image"
+                    class="post__img"
+                  />
+                </div>
+              </article>
+            </a>
+          </section>
+          <aside class="main__sidebar">
+            <div class="sidebar__section sidebar__popular-posts">
+              <h3 class="sidebar__title">인기있는 글</h3>
+              <ul class="sidebar__list">
+                <li class="sidebar__item">
+                  <a href="#">
+                    <span class="sidebar__item-title"
+                      >Node.js 라이브러리 배포 파이프라인에 플러그인 시스템
+                      도입기</span
+                    >
+                    <p class="sidebar__author">장지훈</p>
+                  </a>
+                </li>
+                <li class="sidebar__item">
+                  <a href="#">
+                    <span class="sidebar__item-title"
+                      >레거시 제품을 버리고 CS 효율 높이기</span
+                    >
+                    <p class="sidebar__author">박성경</p>
+                  </a>
+                </li>
+                <li class="sidebar__item">
+                  <a href="#">
+                    <span class="sidebar__item-title"
+                      >토스가 꿈꾸는 React Native 기술의 미래</span
+                    >
+                    <p class="sidebar__author">박서진</p>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="sidebar__section sidebar__tags">
+              <h3 class="sidebar__title">태그</h3>
+              <ul class="sidebar__tags-list">
+                <li class="sidebar__tag-item"><a href="#">Frontend</a></li>
+                <li class="sidebar__tag-item"><a href="#">Server</a></li>
+                <li class="sidebar__tag-item">
+                  <a href="#">Product Design</a>
+                </li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </main>
+      <footer></footer>
+    </div>
   </body>
 </html>
