@@ -1,3 +1,6 @@
-import { PostView } from "./view/PostView.js";
+import "./components/PageHeader.js";
+import "./components/PageFooter.js";
 
-customElements.define("post-view", PostView);
+import { BlogHome } from "./view/BlogHome.js";
+
+customElements.define("blog-home", BlogHome);
