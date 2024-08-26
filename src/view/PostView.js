@@ -12,15 +12,14 @@ export class PostView extends HTMLElement {
   render(posts) {
     window.requestAnimationFrame(() => {
       this.innerHTML = `
-        <section class="main__posts" >
           <ul class="tabs">
               <li class="tabs__item tabs__item--active" data-category="all">전체</li>
               <li class="tabs__item" data-category="tech">개발</li>
               <li class="tabs__item" data-category="design">디자인</li>
           </ul>
           ${posts
-            .map(
-              (post) => `
+          .map(
+            (post) => `
               <a href="/" class="post-link">
                   <article class="post">
                       <div class="post__content">
@@ -33,10 +32,9 @@ export class PostView extends HTMLElement {
                       </div>
                   </article>
               </a>
-          `
-            )
-            .join("")}
-        </section>
+            `
+          )
+          .join("")}
       `;
     });
   }
