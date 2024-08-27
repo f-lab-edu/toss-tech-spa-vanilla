@@ -105,3 +105,5 @@ class Sidebar extends HTMLElement {
 
 customElements.define("post-list", PostList);
 customElements.define("side-bar", Sidebar);
+customElements.define("blog-home", BlogHome);
+
