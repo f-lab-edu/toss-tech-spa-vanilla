@@ -1,7 +1,11 @@
-
 export class BlogArticle extends HTMLElement {
   connectedCallback() {
-    this.innerHTML = `
+    this.render();
+  }
+
+  render() {
+    window.requestAnimationFrame(() => {
+      this.innerHTML = `
       <page-header></page-header>
       <main class="detail-main-content">
         <article class="detail-post">
@@ -43,7 +47,6 @@ export class BlogArticle extends HTMLElement {
       </main>
       <page-footer></page-footer>
     `;
+    });
   }
 }
-
-customElements.define("blog-article", BlogArticle);

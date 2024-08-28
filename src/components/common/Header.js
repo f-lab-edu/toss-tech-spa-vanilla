@@ -4,6 +4,10 @@ export class PageHeader extends HTMLElement {
   }
 
   connectedCallback() {
+    this.render();
+  }
+
+  render() {
     window.requestAnimationFrame(() => {
       this.innerHTML = `
         <header class="header">
@@ -33,4 +37,3 @@ export class PageHeader extends HTMLElement {
     });
   }
 }
-customElements.define("page-header", PageHeader);

@@ -1,14 +1,12 @@
-import "./components/Footer.js";
-import "./components/Header.js";
-import "./view/Article.js";
-import "./view/Home.js";
-
-import createPages from "./pages.js";
-import createRouter from "./router.js";
+import createPages from "@/createPages.js";
+import createRouter from "@/router.js";
+import registerCustomElements from "@/registerElement.js";
 
 const container = document.getElementById("app");
 const pages = createPages(container);
 const router = createRouter();
+
+registerCustomElements();
 
 router
   .addRoute("/", pages.home)
