@@ -1,4 +1,4 @@
-import { PostList, Sidebar } from "@/components/home";
+import { PostList, Sidebar, PostItem, Tabs } from "@/components/home";
 import { PageFooter, PageHeader } from "@/components/common";
 import { BlogHome, BlogArticle } from "@/view";
 
@@ -9,4 +9,6 @@ export default function registerCustomElements() {
   customElements.define("post-list", PostList);
   customElements.define("blog-home", BlogHome);
   customElements.define("blog-article", BlogArticle);
+  customElements.define("post-item", PostItem);
+  customElements.define("tabs-view", Tabs);
 }
