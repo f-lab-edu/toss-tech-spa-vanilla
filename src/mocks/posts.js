@@ -863,73 +863,6 @@ export default {
   ],
   tech: [
     {
-      id: 29417,
-      title: "다이내믹 스크래핑과 전월세대출 이동제의 실행",
-      subtitle:
-        "토스뱅크에서 전월세대출과 대환 프로세스를 만들면서 겪은 어려움을 해결한 방법을 공유합니다.",
-      key: "severdeveloper_dynamic_scraping",
-      publishedTime: "2024-08-21T18:51:00+09:00",
-      editorName: "조민국",
-      thumbnailUrl:
-        "https://static.toss.im/career-resource/0813_%ED%85%8C%ED%81%AC%EB%B8%94%EB%A1%9C%EA%B7%B8_%EC%8D%B8%EB%84%A4%EC%9D%BC2.png",
-      categories: [
-        {
-          name: "개발",
-          id: 1024,
-          slug: "tech",
-          parentId: null,
-          iconUrl: "",
-        },
-      ],
-    },
-    {
-      id: 29415,
-      title: "전세대출에서 대외기관 신용정보를 조회하는 방법",
-      subtitle:
-        "토스뱅크에서 대외기관을 통해 신용정보를 가져오는 과정을 개선한 경험을 소개합니다.",
-      key: "serverdeveloper_housing",
-      publishedTime: "2024-08-20T17:29:00+09:00",
-      editorName: "김동우",
-      thumbnailUrl:
-        "https://static.toss.im/career-resource/0813_%ED%85%8C%ED%81%AC%EB%B8%94%EB%A1%9C%EA%B7%B8_%EC%8D%B8%EB%84%A4%EC%9D%BC2.png",
-      categories: [
-        {
-          name: "개발",
-          id: 1024,
-          slug: "tech",
-          parentId: null,
-          iconUrl: "",
-        },
-      ],
-    },
-    {
-      id: 29419,
-      title: "Node.js 라이브러리 배포 파이프라인에 플러그인 시스템 도입기",
-      subtitle:
-        "100개가 넘는 라이브러리를 관리하면서 마주했던 문제들을 플러그인 시스템으로 풀어낸 방법을 공유합니다.",
-      key: "nodejs_pipeline_plugin",
-      publishedTime: "2024-08-14T14:12:00+09:00",
-      editorName: "장지훈",
-      thumbnailUrl:
-        "https://static.toss.im/illusts-content/tech-0812-cover3.png",
-      categories: [
-        {
-          name: "개발",
-          id: 1024,
-          slug: "tech",
-          parentId: null,
-          iconUrl: "",
-        },
-        {
-          name: "인기글",
-          id: 1058,
-          slug: null,
-          parentId: 1024,
-          iconUrl: null,
-        },
-      ],
-    },
-    {
       id: 28907,
       title: "제 1회 토스 해커톤, 토커톤(Tockerthon)",
       subtitle:
@@ -1287,6 +1220,73 @@ export default {
           slug: "tech",
           parentId: null,
           iconUrl: "",
+        },
+      ],
+    },
+    {
+      id: 29417,
+      title: "다이내믹 스크래핑과 전월세대출 이동제의 실행",
+      subtitle:
+        "토스뱅크에서 전월세대출과 대환 프로세스를 만들면서 겪은 어려움을 해결한 방법을 공유합니다.",
+      key: "severdeveloper_dynamic_scraping",
+      publishedTime: "2024-08-21T18:51:00+09:00",
+      editorName: "조민국",
+      thumbnailUrl:
+        "https://static.toss.im/career-resource/0813_%ED%85%8C%ED%81%AC%EB%B8%94%EB%A1%9C%EA%B7%B8_%EC%8D%B8%EB%84%A4%EC%9D%BC2.png",
+      categories: [
+        {
+          name: "개발",
+          id: 1024,
+          slug: "tech",
+          parentId: null,
+          iconUrl: "",
+        },
+      ],
+    },
+    {
+      id: 29415,
+      title: "전세대출에서 대외기관 신용정보를 조회하는 방법",
+      subtitle:
+        "토스뱅크에서 대외기관을 통해 신용정보를 가져오는 과정을 개선한 경험을 소개합니다.",
+      key: "serverdeveloper_housing",
+      publishedTime: "2024-08-20T17:29:00+09:00",
+      editorName: "김동우",
+      thumbnailUrl:
+        "https://static.toss.im/career-resource/0813_%ED%85%8C%ED%81%AC%EB%B8%94%EB%A1%9C%EA%B7%B8_%EC%8D%B8%EB%84%A4%EC%9D%BC2.png",
+      categories: [
+        {
+          name: "개발",
+          id: 1024,
+          slug: "tech",
+          parentId: null,
+          iconUrl: "",
+        },
+      ],
+    },
+    {
+      id: 29419,
+      title: "Node.js 라이브러리 배포 파이프라인에 플러그인 시스템 도입기",
+      subtitle:
+        "100개가 넘는 라이브러리를 관리하면서 마주했던 문제들을 플러그인 시스템으로 풀어낸 방법을 공유합니다.",
+      key: "nodejs_pipeline_plugin",
+      publishedTime: "2024-08-14T14:12:00+09:00",
+      editorName: "장지훈",
+      thumbnailUrl:
+        "https://static.toss.im/illusts-content/tech-0812-cover3.png",
+      categories: [
+        {
+          name: "개발",
+          id: 1024,
+          slug: "tech",
+          parentId: null,
+          iconUrl: "",
+        },
+        {
+          name: "인기글",
+          id: 1058,
+          slug: null,
+          parentId: 1024,
+          iconUrl: null,
         },
       ],
     },
