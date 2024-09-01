@@ -1,98 +1,82 @@
 const ROUTE_PARAMETER_REGEXP = /:(\w+)/g;
 const URL_FRAGMENT_REGEXP = "([^\\/]+)";
-const TICKTIME = 250;
 const NAV_A_SELECTOR = "a[data-navigation]";
 
-const extractUrlParams = (route, pathname) => {
-  if (route.params.length === 0) {
-    return {};
-  }
-
-  const params = {};
-
-  const matches = pathname.match(route.testRegExp);
-
-  matches.shift();
-
-  matches.forEach((paramValue, index) => {
-    const paramName = route.params[index];
-    params[paramName] = paramValue;
-  });
-
-  return params;
-};
-
-export default () => {
+export default function createRouter() {
   const routes = [];
-  let notFound = () => {};
-  let lastPathname;
+  let notFoundHandler = () => {};
 
-  const router = {};
+  const router = {
+    addRoute(path, callback) {
+      const params = [];
+      const testRegExp = createRegExpFromPath(path, params);
+      routes.push({ testRegExp, callback, params });
+      return this;
+    },
 
-  const checkRoutes = () => {
-    const { pathname } = window.location;
-    if (lastPathname === pathname) {
-      return;
-    }
+    setNotFound(callback) {
+      notFoundHandler = callback;
+      return this;
+    },
 
-    lastPathname = pathname;
+    navigate(path) {
+      window.history.pushState(null, null, path);
+      this.checkRoutes();
+    },
 
-    const currentRoute = routes.find((route) => {
-      return route.testRegExp.test(pathname);
-    });
+    start() {
+      this.checkRoutes();
 
-    if (!currentRoute) {
-      notFound();
-      return;
-    }
+      document.body.addEventListener("click", (event) => {
+        const targetLink = event.target.closest(NAV_A_SELECTOR);
+        if (targetLink) {
+          event.preventDefault();
+          this.navigate(targetLink.href);
+        }
+      });
+    },
 
-    const urlParams = extractUrlParams(currentRoute, pathname);
+    // 현재 경로에 맞는 라우트를 찾아서 실행
+    checkRoutes() {
+      const currentPathname = window.location.pathname;
 
-    currentRoute.callback(urlParams);
-  };
+      const matchingRoute = routes.find((route) =>
+        route.testRegExp.test(currentPathname)
+      );
 
-  router.addRoute = (path, callback) => {
-    const params = [];
-
-    const parsedPath = path
-      .replace(ROUTE_PARAMETER_REGEXP, (match, paramName) => {
-        params.push(paramName);
-        return URL_FRAGMENT_REGEXP;
-      })
-      .replace(/\//g, "\\/");
-
-    routes.push({
-      testRegExp: new RegExp(`^${parsedPath}$`),
-      callback,
-      params,
-    });
-
-    return router;
-  };
-
-  router.setNotFound = (cb) => {
-    notFound = cb;
-    return router;
-  };
-
-  router.navigate = (path) => {
-    window.history.pushState(null, null, path);
-  };
-
-  router.start = () => {
-    checkRoutes();
-    window.setInterval(checkRoutes, TICKTIME);
-
-    document.body.addEventListener("click", (e) => {
-      const { target } = e;
-      if (target.matches(NAV_A_SELECTOR)) {
-        e.preventDefault();
-        router.navigate(target.href);
+      if (matchingRoute) {
+        const urlParams = extractUrlParams(matchingRoute, currentPathname);
+        matchingRoute.callback(urlParams);
+      } else {
+        notFoundHandler();
       }
-    });
-
-    return router;
+    },
   };
 
   return router;
-};
+}
+
+function createRegExpFromPath(path, params) {
+  // 경로에서 /를 이스케이프하고 매개변수를 정규식으로 변환
+  // "/article/:id" -> /^\/article\/([^\/]+)$/
+  const regexPattern = path
+    .replace(/\//g, "\\/")
+    .replace(ROUTE_PARAMETER_REGEXP, (_, paramName) => {
+      params.push(paramName);
+      return URL_FRAGMENT_REGEXP;
+    });
+  return new RegExp(`^${regexPattern}$`);
+}
+
+function extractUrlParams(route, pathname) {
+  const params = {};
+  const matches = pathname.match(route.testRegExp);
+
+  if (matches) {
+    matches.slice(1).forEach((value, index) => {
+      params[route.params[index]] = value;
+    });
+  }
+
+  return params;
+}
