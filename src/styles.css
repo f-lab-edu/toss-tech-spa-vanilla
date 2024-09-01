@@ -164,6 +164,7 @@ a {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
+  align-items: center;
 }
 
 .post-link {
@@ -175,6 +176,8 @@ a {
   display: flex;
   flex-direction: column;
   margin-right: 20px;
+  flex: 1;
+  max-width: calc(100% - 150px); /* 이미지 크기를 제외한 최대 너비 설정 */
 }
 .post__title {
   font-weight: 700;
