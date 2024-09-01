@@ -34,6 +34,10 @@ export default function createRouter() {
           this.navigate(targetLink.href);
         }
       });
+
+      window.addEventListener("popstate", () => {
+        this.checkRoutes();
+      });
     },
 
     // 현재 경로에 맞는 라우트를 찾아서 실행
