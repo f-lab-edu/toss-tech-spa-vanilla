@@ -9,33 +9,33 @@ export class PostList extends HTMLElement {
 
   connectedCallback() {
     this.render();
-  }
-
-  render() {
     window.requestAnimationFrame(() => {
-      this.innerHTML = `
-        <tabs-view></tabs-view>
-        ${this.posts
-          .map(
-            (post) => `
-          <post-item
-            href="/article/${post.id}"
-            title="${post.title}"
-            subtitle="${post.subtitle}"
-            publishedTime="${post.publishedTime}"
-            editorName="${post.editorName}"
-            thumbnailUrl="${post.thumbnailUrl}"
-          ></post-item>
-        `
-          )
-          .join("")}
-        `;
-
       this.setupTabsListeners();
       this.updateActiveTab(
         this.querySelector(`[data-category="${this.activeTab}"]`)
       );
     });
+  }
+
+  render() {
+    this.innerHTML = "";
+    const tabsView = document.createElement("tabs-view");
+    this.appendChild(tabsView);
+
+    this.posts.forEach((post) => {
+      this.createPostItem(post);
+    });
+  }
+
+  createPostItem(post) {
+    const postItem = document.createElement("post-item");
+    postItem.setAttribute("href", `/article/${post.id}`);
+    postItem.setAttribute("title", post.title);
+    postItem.setAttribute("subtitle", post.subtitle);
+    postItem.setAttribute("publishedTime", post.publishedTime);
+    postItem.setAttribute("editorName", post.editorName);
+    postItem.setAttribute("thumbnailUrl", post.thumbnailUrl);
+    this.appendChild(postItem);
   }
 
   setupTabsListeners() {
@@ -51,7 +51,18 @@ export class PostList extends HTMLElement {
 
   filterPostsByCategory(category) {
     this.posts = posts[category];
-    this.render();
+    this.updatePostList();
+    window.requestAnimationFrame(() => {
+      this.updateActiveTab(this.querySelector(`[data-category="${category}"]`));
+    });
+  }
+
+  updatePostList() {
+    const postList = this.querySelectorAll("post-item");
+    postList.forEach((post) => post.remove());
+    this.posts.forEach((post) => {
+      this.createPostItem(post);
+    });
   }
 
   updateActiveTab(selectedTab) {
