@@ -9,22 +9,23 @@ export class PostList extends HTMLElement {
 
   connectedCallback() {
     this.render();
-    window.requestAnimationFrame(() => {
-      this.setupTabsListeners();
-    });
   }
 
   render() {
-    this.renderTabs();
+    this.replaceContent(this.createTabs());
     this.renderPosts();
   }
 
-  renderTabs() {
-    this.innerHTML = "";
+  createTabs() {
     const tabsView = document.createElement("tabs-view");
-    this.appendChild(tabsView);
+    
+    window.requestAnimationFrame(() => {
+      tabsView.addEventListener("click", (event) => this.handleTabClick(event));
+    });
+    
+    return tabsView;
   }
-
+  
   renderPosts() {
     this.posts.forEach((post) => {
       this.createPostItem(post);
@@ -44,11 +45,6 @@ export class PostList extends HTMLElement {
     postItem.setAttribute("publishedTime", post.publishedTime);
     postItem.setAttribute("editorName", post.editorName);
     postItem.setAttribute("thumbnailUrl", post.thumbnailUrl);
-  }
-
-  setupTabsListeners() {
-    const tabsView = this.querySelector("tabs-view");
-    tabsView.addEventListener("click", (event) => this.handleTabClick(event));
   }
 
   handleTabClick(event) {
@@ -75,5 +71,10 @@ export class PostList extends HTMLElement {
   clearPosts() {
     const postItems = this.querySelectorAll("post-item");
     postItems.forEach((post) => post.remove());
+  }
+
+  replaceContent(newElement) {
+    this.innerHTML = "";
+    this.appendChild(newElement);
   }
 }
