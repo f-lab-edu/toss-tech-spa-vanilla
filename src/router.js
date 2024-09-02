@@ -8,8 +8,7 @@ export default function createRouter() {
 
   const router = {
     addRoute(path, callback) {
-      const params = [];
-      const testRegExp = createRegExpFromPath(path, params);
+      const { testRegExp, params } = createRegExpFromPath(path);
       routes.push({ testRegExp, callback, params });
       return this;
     },
@@ -40,7 +39,6 @@ export default function createRouter() {
       });
     },
 
-    // 현재 경로에 맞는 라우트를 찾아서 실행
     checkRoutes() {
       const currentPathname = window.location.pathname;
 
@@ -60,16 +58,18 @@ export default function createRouter() {
   return router;
 }
 
-function createRegExpFromPath(path, params) {
-  // 경로에서 /를 이스케이프하고 매개변수를 정규식으로 변환
-  // "/article/:id" -> /^\/article\/([^\/]+)$/
+function createRegExpFromPath(path) {
+  const params = [];
   const regexPattern = path
     .replace(/\//g, "\\/")
     .replace(ROUTE_PARAMETER_REGEXP, (_, paramName) => {
       params.push(paramName);
       return URL_FRAGMENT_REGEXP;
     });
-  return new RegExp(`^${regexPattern}$`);
+  return {
+    testRegExp: new RegExp(`^${regexPattern}$`),
+    params,
+  };
 }
 
 function extractUrlParams(route, pathname) {
