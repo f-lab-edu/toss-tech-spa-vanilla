@@ -1,25 +1,29 @@
 export default (container) => {
-  const clearContainer = () => {
+  const replaceContainerContent = (element) => {
     container.innerHTML = "";
+    container.appendChild(element);
   };
 
   const home = () => {
-    clearContainer();
     const homeElement = document.createElement("blog-home");
-    container.appendChild(homeElement);
+
+    replaceContainerContent(homeElement);
   };
 
   const article = (params) => {
-    clearContainer();
     const { id } = params;
-    const articleElement = document.createElement("blog-article");
-    articleElement.setAttribute("id", id);
-    container.appendChild(articleElement);
+
+    const articleElementNode = document.createElement("blog-article");
+    articleElementNode.setAttribute("id", id);
+
+    replaceContainerContent(articleElementNode);
   };
 
   const notFound = () => {
-    clearContainer();
-    container.textContent = "Page Not Found!";
+    const notFoundElement = document.createElement("div");
+    notFoundElement.innerHTML = "Page Not Found!";
+
+    replaceContainerContent(notFoundNode);
   };
 
   return {
