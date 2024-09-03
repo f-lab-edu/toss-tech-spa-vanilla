@@ -12,51 +12,69 @@ export class PostList extends HTMLElement {
   }
 
   render() {
-    window.requestAnimationFrame(() => {
-      this.innerHTML = `
-        <tabs-view></tabs-view>
-        ${this.posts
-          .map(
-            (post) => `
-          <post-item
-            href="/article/${post.id}"
-            title="${post.title}"
-            subtitle="${post.subtitle}"
-            publishedTime="${post.publishedTime}"
-            editorName="${post.editorName}"
-            thumbnailUrl="${post.thumbnailUrl}"
-          ></post-item>
-        `
-          )
-          .join("")}
-        `;
+    this.replaceContent(this.createTabs());
+    this.renderPosts();
+  }
 
-      this.setupTabsListeners();
-      this.updateActiveTab(
-        this.querySelector(`[data-category="${this.activeTab}"]`)
-      );
+  createTabs() {
+    const tabsView = document.createElement("tabs-view");
+    
+    window.requestAnimationFrame(() => {
+      tabsView.addEventListener("click", (event) => this.handleTabClick(event));
+    });
+    
+    return tabsView;
+  }
+  
+  renderPosts() {
+    this.posts.forEach((post) => {
+      this.createPostItem(post);
     });
   }
 
-  setupTabsListeners() {
-    const tabs = this.querySelector("tabs-view");
-    tabs.addEventListener("click", (event) => {
-      const category = event.target.dataset.category;
-      if (category) {
-        this.filterPostsByCategory(category);
-        this.activeTab = category;
-      }
-    });
+  createPostItem(post) {
+    const postItem = document.createElement("post-item");
+    this.setPostAttributes(postItem, post);
+    this.appendChild(postItem);
+  }
+
+  setPostAttributes(postItem, post) {
+    postItem.setAttribute("href", `/article/${post.id}`);
+    postItem.setAttribute("title", post.title);
+    postItem.setAttribute("subtitle", post.subtitle);
+    postItem.setAttribute("publishedTime", post.publishedTime);
+    postItem.setAttribute("editorName", post.editorName);
+    postItem.setAttribute("thumbnailUrl", post.thumbnailUrl);
+  }
+
+  handleTabClick(event) {
+    const category = event.target.dataset.category;
+    const isDifferentCategory = category && category !== this.activeTab;
+    if (isDifferentCategory) {
+      this.activeTab = category;
+      this.filterPostsByCategory(category);
+      const tabsView = this.querySelector("tabs-view");
+      tabsView.updateActiveTab(category);
+    }
   }
 
   filterPostsByCategory(category) {
     this.posts = posts[category];
-    this.render();
+    this.updatePosts();
   }
 
-  updateActiveTab(selectedTab) {
-    const tabs = this.querySelectorAll(".tabs__item");
-    tabs.forEach((tab) => tab.classList.remove("tabs__item--active"));
-    selectedTab.classList.add("tabs__item--active");
+  updatePosts() {
+    this.clearPosts();
+    this.renderPosts();
+  }
+
+  clearPosts() {
+    const postItems = this.querySelectorAll("post-item");
+    postItems.forEach((post) => post.remove());
+  }
+
+  replaceContent(newElement) {
+    this.innerHTML = "";
+    this.appendChild(newElement);
   }
 }
