@@ -1,4 +1,5 @@
 import posts from "@/mocks/posts.js";
+import { formatDate } from "@/utils/dateUtils.js";
 
 export class PostList extends HTMLElement {
   constructor() {
@@ -18,14 +19,14 @@ export class PostList extends HTMLElement {
 
   createTabs() {
     const tabsView = document.createElement("tabs-view");
-    
+
     window.requestAnimationFrame(() => {
       tabsView.addEventListener("click", (event) => this.handleTabClick(event));
     });
-    
+
     return tabsView;
   }
-  
+
   renderPosts() {
     this.posts.forEach((post) => {
       this.createPostItem(post);
@@ -42,7 +43,7 @@ export class PostList extends HTMLElement {
     postItem.setAttribute("href", `/article/${post.id}`);
     postItem.setAttribute("title", post.title);
     postItem.setAttribute("subtitle", post.subtitle);
-    postItem.setAttribute("publishedTime", post.publishedTime);
+    postItem.setAttribute("publishedTime", formatDate(post.publishedTime));
     postItem.setAttribute("editorName", post.editorName);
     postItem.setAttribute("thumbnailUrl", post.thumbnailUrl);
   }
