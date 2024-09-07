@@ -18,29 +18,51 @@ export class PostList extends HTMLElement {
   }
 
   render() {
-    const tabsView = this.createTabs();
-    this.replaceContent(tabsView);
+    this.renderTabs();
     this.renderPosts();
+  }
+
+  renderTabs() {
+    const newTabsView = this.createTabs();
+    const existingTabsView = this.querySelector("tabs-view");
+
+    if (existingTabsView) {
+      this.replaceChild(newTabsView, existingTabsView);
+    } else {
+      this.appendChild(newTabsView);
+    }
   }
 
   createTabs() {
     const tabsView = document.createElement("tabs-view");
-
-    tabsView.addEventListener("click", (event) => this.handleTabClick(event));
-
+    tabsView.addEventListener("click", (event) => this.handleTabClick(event)); // 탭 클릭 이벤트 등록
     return tabsView;
   }
 
   renderPosts() {
+    const newPostList = document.createElement("div");
+
     this.posts.forEach((post) => {
-      this.createPostItem(post);
+      const postItem = this.createPostItem(post);
+      newPostList.appendChild(postItem);
     });
+
+    const existingPostList = this.querySelector(".post-list");
+
+    // 기존 post-list가 있으면 교체, 없으면 추가
+    if (existingPostList) {
+      this.replaceChild(newPostList, existingPostList);
+    } else {
+      this.appendChild(newPostList);
+    }
+
+    newPostList.classList.add("post-list");
   }
 
   createPostItem(post) {
     const postItem = document.createElement("post-item");
     this.setPostAttributes(postItem, post);
-    this.appendChild(postItem);
+    return postItem;
   }
 
   setPostAttributes(postItem, post) {
@@ -59,16 +81,12 @@ export class PostList extends HTMLElement {
     if (isDifferentCategory) {
       this.activeTab = category;
       await this.fetchPosts();
-      this.render();
+      this.renderPosts();
 
       const tabsView = this.querySelector("tabs-view");
       if (tabsView) {
         tabsView.updateActiveTab(category);
       }
     }
-  }
-  replaceContent(newElement) {
-    this.innerHTML = "";
-    this.appendChild(newElement);
   }
 }
