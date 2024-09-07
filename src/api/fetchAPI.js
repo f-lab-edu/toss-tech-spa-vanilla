@@ -8,8 +8,7 @@ const parseResponse = async (response) => {
     const data = await response.json();
     return { status, data };
   } catch (error) {
-    console.error("Error", error);
-    return { status, data: null };
+    throw new Error("JSON 응답을 파싱하는 데 실패했습니다.");
   }
 };
 
@@ -26,13 +25,15 @@ const get = async (url, headers = {}) => {
     const response = await fetch(url, config);
 
     if (!response.ok) {
-      throw new Error(`HTTP error: ${response.status}`);
+      throw new Error(`HTTP 오류: ${response.status} - ${response.statusText}`);
     }
 
     return await parseResponse(response);
   } catch (error) {
-    console.error(`Fetch error: ${error.message}`);
-    return { status: null, data: null, error: error.message };
+    console.error(`Fetch 에러: ${error.message}`);
+    throw new Error(
+      `데이터를 가져오는 중 오류가 발생했습니다: ${error.message}`
+    );
   }
 };
 
