@@ -23,7 +23,7 @@ export default (container) => {
     const notFoundElement = document.createElement("div");
     notFoundElement.innerHTML = "Page Not Found!";
 
-    replaceContainerContent(notFoundNode);
+    replaceContainerContent(notFoundElement);
   };
 
   return {

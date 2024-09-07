@@ -1,28 +1,32 @@
-import posts from "@/mocks/posts.js";
+import postService from "@/services/postService";
 import { formatDate } from "@/utils/dateUtils.js";
 
 export class PostList extends HTMLElement {
   constructor() {
     super();
-    this.posts = posts.all;
+    this.posts = [];
     this.activeTab = "all";
   }
 
-  connectedCallback() {
+  async connectedCallback() {
+    await this.fetchPosts();
     this.render();
   }
 
+  async fetchPosts() {
+    this.posts = await postService.fetchPosts(this.activeTab);
+  }
+
   render() {
-    this.replaceContent(this.createTabs());
+    const tabsView = this.createTabs();
+    this.replaceContent(tabsView);
     this.renderPosts();
   }
 
   createTabs() {
     const tabsView = document.createElement("tabs-view");
 
-    window.requestAnimationFrame(() => {
-      tabsView.addEventListener("click", (event) => this.handleTabClick(event));
-    });
+    tabsView.addEventListener("click", (event) => this.handleTabClick(event));
 
     return tabsView;
   }
@@ -48,32 +52,21 @@ export class PostList extends HTMLElement {
     postItem.setAttribute("thumbnailUrl", post.thumbnailUrl);
   }
 
-  handleTabClick(event) {
+  async handleTabClick(event) {
     const category = event.target.dataset.category;
     const isDifferentCategory = category && category !== this.activeTab;
+
     if (isDifferentCategory) {
       this.activeTab = category;
-      this.filterPostsByCategory(category);
+      await this.fetchPosts();
+      this.render();
+
       const tabsView = this.querySelector("tabs-view");
-      tabsView.updateActiveTab(category);
+      if (tabsView) {
+        tabsView.updateActiveTab(category);
+      }
     }
   }
-
-  filterPostsByCategory(category) {
-    this.posts = posts[category];
-    this.updatePosts();
-  }
-
-  updatePosts() {
-    this.clearPosts();
-    this.renderPosts();
-  }
-
-  clearPosts() {
-    const postItems = this.querySelectorAll("post-item");
-    postItems.forEach((post) => post.remove());
-  }
-
   replaceContent(newElement) {
     this.innerHTML = "";
     this.appendChild(newElement);
