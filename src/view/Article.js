@@ -1,5 +1,5 @@
-import { findPostById } from "@/services/postService";
 import { formatDate } from "@/utils/dateUtils";
+import postService from "@/services/postService";
 
 export class BlogArticle extends HTMLElement {
   constructor() {
@@ -7,18 +7,19 @@ export class BlogArticle extends HTMLElement {
     this.post = null;
   }
 
-  connectedCallback() {
-    this.loadPostData();
+  async connectedCallback() {
+    await this.loadPostData();
     this.render();
   }
 
-  loadPostData() {
+  async loadPostData() {
     const postId = this.getPostId();
-    this.post = findPostById(postId);
+    const result = await postService.fetchPostById(postId);
+    this.post = result[0];
   }
 
   getPostId() {
-    return +this.getAttribute("id");
+    return this.getAttribute("id");
   }
 
   render() {

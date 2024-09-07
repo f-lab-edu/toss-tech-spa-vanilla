@@ -1,6 +1,6 @@
 import api from "@/api/fetchApi";
 
-const fetchPosts = async (category) => {
+async function fetchPosts(category = "all") {
   try {
     const url =
       category === "all"
@@ -10,20 +10,20 @@ const fetchPosts = async (category) => {
     const response = await api.get(url);
     return response.data;
   } catch (error) {
-    console.error("Error fetching posts:", error);
-    throw error;
+    console.error("Error", error.message || error);
+    throw new Error(error);
   }
-};
+}
 
-const fetchPostById = async (postId) => {
+async function fetchPostById(postId) {
   try {
-    const response = await api.get(`http://localhost:3000/posts/${postId}`);
+    const response = await api.get(`http://localhost:3000/posts?id=${postId}`);
     return response.data;
   } catch (error) {
-    console.error(`Error fetching post with ID ${postId}:`, error);
-    throw error;
+    console.error("Error", error.message || error);
+    throw new Error(error);
   }
-};
+}
 
 export default {
   fetchPosts,
