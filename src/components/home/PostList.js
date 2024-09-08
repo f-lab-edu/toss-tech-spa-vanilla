@@ -82,11 +82,6 @@ export class PostList extends HTMLElement {
       this.activeTab = category;
       await this.fetchPosts();
       this.renderPosts();
-
-      const tabsView = this.querySelector("tabs-view");
-      if (tabsView) {
-        tabsView.updateActiveTab(category);
-      }
     }
   }
 }
