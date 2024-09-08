@@ -1,19 +1,14 @@
 import { formatDate } from "@/utils/dateUtils";
 import postService from "@/services/postService";
-
-export class BlogArticle extends HTMLElement {
+import BaseComponent from "@/components/BaseComponent/component";
+export class BlogArticle extends BaseComponent {
   constructor() {
     super();
     this.post = null;
   }
 
-  async connectedCallback() {
-    await this.loadPostData();
-    this.render();
-  }
-
-  async loadPostData() {
-    const postId = this.getPostId();
+  async loadData() {
+    const postId = this.getDataId();
     const result = await postService.fetchPostById(postId);
     this.post = result[0];
   }

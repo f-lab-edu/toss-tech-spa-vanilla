@@ -1,10 +1,8 @@
-export class PostItem extends HTMLElement {
+import BaseComponent from "@/components/BaseComponent/component";
+
+export class PostItem extends BaseComponent {
   constructor() {
     super();
-  }
-
-  connectedCallback() {
-    this.render();
   }
 
   render() {

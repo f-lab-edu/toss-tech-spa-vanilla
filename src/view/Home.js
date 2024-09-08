@@ -1,6 +1,8 @@
-export class BlogHome extends HTMLElement {
-  connectedCallback() {
-    this.render();
+import BaseComponent from "@/components/BaseComponent/component";
+
+export class BlogHome extends BaseComponent {
+  constructor() {
+    super();
   }
 
   render() {

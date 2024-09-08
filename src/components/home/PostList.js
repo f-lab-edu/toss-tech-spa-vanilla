@@ -1,19 +1,15 @@
 import postService from "@/services/postService";
 import { formatDate } from "@/utils/dateUtils.js";
+import BaseComponent from "@/components/BaseComponent/component";
 
-export class PostList extends HTMLElement {
+export class PostList extends BaseComponent {
   constructor() {
     super();
     this.posts = [];
     this.activeTab = "all";
   }
 
-  async connectedCallback() {
-    await this.fetchPosts();
-    this.render();
-  }
-
-  async fetchPosts() {
+  async loadData() {
     this.posts = await postService.fetchPosts(this.activeTab);
   }
 
@@ -35,7 +31,7 @@ export class PostList extends HTMLElement {
 
   createTabs() {
     const tabsView = document.createElement("tabs-view");
-    tabsView.addEventListener("click", (event) => this.handleTabClick(event)); // 탭 클릭 이벤트 등록
+    tabsView.addEventListener("click", (event) => this.handleTabClick(event));
     return tabsView;
   }
 
@@ -49,7 +45,6 @@ export class PostList extends HTMLElement {
 
     const existingPostList = this.querySelector(".post-list");
 
-    // 기존 post-list가 있으면 교체, 없으면 추가
     if (existingPostList) {
       this.replaceChild(newPostList, existingPostList);
     } else {
@@ -80,7 +75,7 @@ export class PostList extends HTMLElement {
 
     if (isDifferentCategory) {
       this.activeTab = category;
-      await this.fetchPosts();
+      await this.loadData();
       this.renderPosts();
     }
   }
