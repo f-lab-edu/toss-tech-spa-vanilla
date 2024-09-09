@@ -12,7 +12,7 @@ const parseResponse = async (response) => {
   }
 };
 
-const get = async (url, headers = {}) => {
+async function fetchData(url, headers = {}) {
   const config = {
     method: "GET",
     headers: new Headers({
@@ -35,8 +35,8 @@ const get = async (url, headers = {}) => {
       `데이터를 가져오는 중 오류가 발생했습니다: ${error.message}`
     );
   }
-};
+}
 
 export default {
-  get,
+  fetchData,
 };
