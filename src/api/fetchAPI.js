@@ -1,3 +1,5 @@
+import CustomError from "@/utils/CustomError";
+
 const parseResponse = async (response) => {
   const { status } = response;
 
@@ -8,11 +10,11 @@ const parseResponse = async (response) => {
     const data = await response.json();
     return { status, data };
   } catch (error) {
-    throw new Error("JSON 응답을 파싱하는 데 실패했습니다.");
+    throw new CustomError("JSON 응답을 파싱하는 데 실패했습니다.", status); // CustomError 사용
   }
 };
 
-const get = async (url, headers = {}) => {
+async function fetchData(url, headers = {}) {
   const config = {
     method: "GET",
     headers: new Headers({
@@ -25,18 +27,20 @@ const get = async (url, headers = {}) => {
     const response = await fetch(url, config);
 
     if (!response.ok) {
-      throw new Error(`HTTP 오류: ${response.status} - ${response.statusText}`);
+      throw new CustomError(
+        `HTTP 오류: ${response.status} - ${response.statusText}`,
+        response.status
+      );
     }
 
     return await parseResponse(response);
   } catch (error) {
-    console.error(`Fetch 에러: ${error.message}`);
-    throw new Error(
+    throw new CustomError(
       `데이터를 가져오는 중 오류가 발생했습니다: ${error.message}`
     );
   }
-};
+}
 
 export default {
-  get,
+  fetchData,
 };
