@@ -1,9 +1,6 @@
-export class Tabs extends HTMLElement {
-  connectedCallback() {
-    this.render();
-    this.setupListener();
-  }
+import BaseComponent from "@/components/BaseComponent/component";
 
+export class Tabs extends BaseComponent {
   render() {
     this.innerHTML = `
       <ul class="tabs">

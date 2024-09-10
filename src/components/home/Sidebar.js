@@ -1,12 +1,6 @@
-export class Sidebar extends HTMLElement {
-  constructor() {
-    super();
-  }
+import BaseComponent from "@/components/BaseComponent/component";
 
-  connectedCallback() {
-    this.render();
-  }
-
+export class Sidebar extends BaseComponent {
   render() {
     window.requestAnimationFrame(() => {
       this.innerHTML = `
