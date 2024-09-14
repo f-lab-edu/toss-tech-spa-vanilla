@@ -1,5 +1,5 @@
-export default (container) => {
-  const replaceContainerContent = (element) => {
+export default (container: HTMLElement) => {
+  const replaceContainerContent = (element: HTMLElement) => {
     container.innerHTML = "";
     container.appendChild(element);
   };
@@ -10,7 +10,7 @@ export default (container) => {
     replaceContainerContent(homeElement);
   };
 
-  const article = (params) => {
+  const article = (params: { id: string }) => {
     const { id } = params;
 
     const articleElementNode = document.createElement("blog-article");

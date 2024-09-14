@@ -1,16 +1,20 @@
 import { formatDate } from "@/utils/dateUtils";
 import postService from "@/services/postService";
 import BaseComponent from "@/components/BaseComponent/component";
+import { Post } from "@/models/Posts";
 export class BlogArticle extends BaseComponent {
+  post: Post | null;
   constructor() {
     super();
     this.post = null;
   }
 
-  async loadData() {
-    const postId = this.getDataId();
-    const result = await postService.fetchPostById(postId);
-    this.post = result[0];
+  async loadData(): Promise<void> {
+    const postId = this.getPostId();
+    if (postId) {
+      const result = await postService.fetchPostById(postId);
+      this.post = result?.[0] || null;
+    }
   }
 
   getPostId() {
@@ -29,7 +33,10 @@ export class BlogArticle extends BaseComponent {
     });
   }
 
-  renderArticle(post) {
+  renderArticle(post: Post | null) {
+    if (!post) {
+      return `<div class="detail-post">게시글을 찾을 수 없습니다.</div>`;
+    }
     return `
       <article class="detail-post">
       <div class="detail-post__cover">

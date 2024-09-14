@@ -1,8 +1,8 @@
-import createPages from "@/createPages.js";
-import createRouter from "@/router.js";
-import registerCustomElements from "@/registerElement.js";
+import createPages from "@/createPages";
+import createRouter from "@/router";
+import registerCustomElements from "@/registerElement";
 
-const container = document.getElementById("app");
+const container = document.getElementById("app") as HTMLElement;
 const pages = createPages(container);
 const router = createRouter();
 
