@@ -1,8 +1,8 @@
-import api from "@/api/fetchApi";
+import api from "@/api/fetchAPI";
 import { ApiResponse } from "@/models/ApiResponse";
 import { Post } from "@/models/Posts";
 
-async function fetchPosts(category: string = "all"): Promise<Post[]> {
+async function fetchPosts(category: string = "all"): Promise<Post[] | null> {
   const url =
     category === "all"
       ? "http://localhost:3000/posts"
@@ -12,7 +12,7 @@ async function fetchPosts(category: string = "all"): Promise<Post[]> {
   return response.data;
 }
 
-async function fetchPostById(postId: string): Promise<Post[]> {
+async function fetchPostById(postId: string): Promise<Post[] | null> {
   const response: ApiResponse<Post> = await api.fetchData(
     `http://localhost:3000/posts?id=${postId}`
   );
