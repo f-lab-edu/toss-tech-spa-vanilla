@@ -1,5 +1,5 @@
 import postService from "@/services/postService";
-import { formatDate } from "@/utils/dateUtils.js";
+import { formatDate } from "@/utils/dateUtils";
 import BaseComponent from "@/components/BaseComponent/component";
 
 export class PostList extends BaseComponent {
