@@ -1,3 +1,5 @@
+import CustomError from "@/utils/CustomError";
+
 class BaseComponent extends HTMLElement {
   constructor() {
     super();
@@ -13,7 +15,7 @@ class BaseComponent extends HTMLElement {
 
   // 필수 구현
   render() {
-    throw new Error("render() must be implemented by subclass");
+    throw new CustomError("render() must be implemented by subclass");
   }
 
   setupListener() {}

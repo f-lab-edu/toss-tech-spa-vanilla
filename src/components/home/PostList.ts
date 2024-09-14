@@ -1,8 +1,12 @@
 import postService from "@/services/postService";
 import { formatDate } from "@/utils/dateUtils";
 import BaseComponent from "@/components/BaseComponent/component";
+import { Post } from "@/models/Posts";
 
 export class PostList extends BaseComponent {
+  posts: Post[];
+  activeTab: string;
+
   constructor() {
     super();
     this.posts = [];
@@ -10,7 +14,12 @@ export class PostList extends BaseComponent {
   }
 
   async loadData() {
-    this.posts = await postService.fetchPosts(this.activeTab);
+    const posts = await postService.fetchPosts(this.activeTab);
+    if (posts !== null) {
+      this.posts = posts;
+    } else {
+      this.posts = []; // null일 경우 빈 배열 할당
+    }
   }
 
   render() {
@@ -54,13 +63,13 @@ export class PostList extends BaseComponent {
     newPostList.classList.add("post-list");
   }
 
-  createPostItem(post) {
+  createPostItem(post: Post) {
     const postItem = document.createElement("post-item");
     this.setPostAttributes(postItem, post);
     return postItem;
   }
 
-  setPostAttributes(postItem, post) {
+  setPostAttributes(postItem: HTMLElement, post: Post) {
     postItem.setAttribute("href", `/article/${post.id}`);
     postItem.setAttribute("title", post.title);
     postItem.setAttribute("subtitle", post.subtitle);
@@ -69,8 +78,9 @@ export class PostList extends BaseComponent {
     postItem.setAttribute("thumbnailUrl", post.thumbnailUrl);
   }
 
-  async handleTabClick(event) {
-    const category = event.target.dataset.category;
+  async handleTabClick(event: Event) {
+    const target = event.target as HTMLElement;
+    const category = target.dataset.category;
     const isDifferentCategory = category && category !== this.activeTab;
 
     if (isDifferentCategory) {

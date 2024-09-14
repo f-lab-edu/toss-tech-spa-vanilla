@@ -13,14 +13,15 @@ export class Tabs extends BaseComponent {
 
   setupListener() {
     this.addEventListener("click", (event) => {
-      const category = event.target.dataset.category;
+      const target = event.target as HTMLElement;
+      const category = target.dataset.category;
       if (category) {
         this.updateActiveTab(category);
       }
     });
   }
 
-  updateActiveTab(category) {
+  updateActiveTab(category: string) {
     const selectedTab = this.querySelector(`[data-category="${category}"]`);
     const tabs = this.querySelectorAll(".tabs__item");
     tabs.forEach((tab) => tab.classList.remove("tabs__item--active"));
