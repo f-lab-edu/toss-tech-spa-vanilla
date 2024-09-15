@@ -28,9 +28,9 @@
     "module": "commonjs" /* Specify what module code is generated. */,
     "rootDir": "./src" /* Specify the root folder within your source files. */,
     // "moduleResolution": "node",                       /* Specify how TypeScript looks up a file from a given module specifier. */
-    "baseUrl": "src", // 절대 경로의 기준을 src 디렉토리로 설정
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"] // @/를 src 디렉토리로 매핑
+      "@/*": ["src/*"] // @/를 src 디렉토리로 매핑
     },
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
     // "typeRoots": [],                                  /* Specify multiple folders that act like './node_modules/@types'. */
@@ -103,6 +103,7 @@
     "skipLibCheck": true /* Skip type checking all .d.ts files. */
   },
   "include": [
-    "src/**/*.ts"
-  ] /* Specify an array of 'glob' patterns that match files to be included in the compilation. */
+    "src"
+  ] /* Specify an array of 'glob' patterns that match files to be included in the compilation. */,
+  "exclude": ["node_modules"]
 }
