@@ -1,5 +1,5 @@
 import api from "@/api/fetchAPI";
-import { ApiResponse } from "@/models/ApiResponse";
+import { ApiResponse } from "@/models/ApiTypes";
 import { Post } from "@/models/Posts";
 
 async function fetchPosts(category: string = "all"): Promise<Post[] | null> {
