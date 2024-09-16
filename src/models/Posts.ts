@@ -7,3 +7,5 @@ export type Post = {
   editorName: string;
   thumbnailUrl: string;
 };
+
+export type Category = "all" | "tech" | "design";

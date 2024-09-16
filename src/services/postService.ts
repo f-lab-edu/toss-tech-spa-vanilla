@@ -1,8 +1,8 @@
 import api from "@/api/fetchAPI";
 import { ApiResponse } from "@/models/ApiTypes";
-import { Post } from "@/models/Posts";
+import { Category, Post } from "@/models/Posts";
 
-async function fetchPosts(category: string = "all"): Promise<Post[] | null> {
+async function fetchPosts(category: Category = "all"): Promise<Post[] | null> {
   const url =
     category === "all"
       ? "http://localhost:3000/posts"

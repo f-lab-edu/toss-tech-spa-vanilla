@@ -1,4 +1,5 @@
 import BaseComponent from "@/components/BaseComponent/component";
+import { Category } from "@/models/Posts";
 
 export class Tabs extends BaseComponent {
   render() {
@@ -14,14 +15,14 @@ export class Tabs extends BaseComponent {
   setupListener() {
     this.addEventListener("click", (event) => {
       const target = event.target as HTMLElement;
-      const category = target.dataset.category;
+      const category = target.dataset.category as Category;
       if (category) {
         this.updateActiveTab(category);
       }
     });
   }
 
-  updateActiveTab(category: string) {
+  updateActiveTab(category: Category) {
     const selectedTab = this.querySelector(`[data-category="${category}"]`);
     const tabs = this.querySelectorAll(".tabs__item");
     tabs.forEach((tab) => tab.classList.remove("tabs__item--active"));

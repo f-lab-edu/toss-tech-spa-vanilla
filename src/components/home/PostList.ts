@@ -1,11 +1,11 @@
 import postService from "@/services/postService";
 import { formatDate } from "@/utils/dateUtils";
 import BaseComponent from "@/components/BaseComponent/component";
-import { Post } from "@/models/Posts";
+import { Category, Post } from "@/models/Posts";
 
 export class PostList extends BaseComponent {
   posts: Post[];
-  activeTab: string;
+  activeTab: Category;
 
   constructor() {
     super();
@@ -80,13 +80,15 @@ export class PostList extends BaseComponent {
 
   async handleTabClick(event: Event) {
     const target = event.target as HTMLElement;
-    const category = target.dataset.category;
-    const isDifferentCategory = category && category !== this.activeTab;
+    if (target instanceof HTMLElement) {
+      const category = target.dataset.category as Category;
+      const isDifferentCategory = category && category !== this.activeTab;
 
-    if (isDifferentCategory) {
-      this.activeTab = category;
-      await this.loadData();
-      this.renderPosts();
+      if (isDifferentCategory) {
+        this.activeTab = category;
+        await this.loadData();
+        this.renderPosts();
+      }
     }
   }
 }
