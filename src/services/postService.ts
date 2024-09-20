@@ -2,21 +2,20 @@ import api from "@/api/fetchAPI";
 import { ApiResponse } from "@/models/ApiTypes";
 import { Category, Post } from "@/models/Posts";
 
-async function fetchPosts(category: Category = "all"): Promise<Post[] | null> {
+async function fetchPosts(category: Category = "all") {
   const url =
     category === "all"
       ? "http://localhost:3000/posts"
       : `http://localhost:3000/posts?category=${category}`;
 
-  const response: ApiResponse<Post> = await api.fetchData(url);
+  const response = await api.fetchData<Post>(url);
   return response.data;
 }
 
-async function fetchPostById(postId: string): Promise<Post[] | null> {
-  const response: ApiResponse<Post> = await api.fetchData(
+async function fetchPostById(postId: string) {
+  const response = await api.fetchData<Post>(
     `http://localhost:3000/posts?id=${postId}`
   );
-
   return response.data;
 }
 

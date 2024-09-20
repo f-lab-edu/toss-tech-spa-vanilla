@@ -11,7 +11,7 @@ export class BlogArticle extends BaseComponent {
 
   async loadData(): Promise<void> {
     const postId = this.getPostId();
-    if (postId) {
+    if (postId != null && postId !== "") {
       const result = await postService.fetchPostById(postId);
       this.post = result?.[0] || null;
     }
@@ -34,7 +34,7 @@ export class BlogArticle extends BaseComponent {
   }
 
   renderArticle(post: Post | null) {
-    if (!post) {
+    if (post == null) {
       return `<div class="detail-post">게시글을 찾을 수 없습니다.</div>`;
     }
     return `

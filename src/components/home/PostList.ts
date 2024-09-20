@@ -78,8 +78,8 @@ export class PostList extends BaseComponent {
     postItem.setAttribute("thumbnailUrl", post.thumbnailUrl);
   }
 
-  async handleTabClick(event: Event) {
-    const target = event.target as HTMLElement;
+  async handleTabClick(event: MouseEvent) {
+    const target = event.target;
     if (target instanceof HTMLElement) {
       const category = target.dataset.category as Category;
       const isDifferentCategory = category && category !== this.activeTab;

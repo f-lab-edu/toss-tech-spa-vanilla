@@ -4,7 +4,7 @@ import createRouter from "@/router";
 import CustomError from "./utils/CustomError";
 
 const container = document.getElementById("app");
-if (!container) {
+if (container == null) {
   throw new CustomError("App 컨테이너를 찾을 수 없습니다");
 }
 const pages = createPages(container);

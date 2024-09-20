@@ -1,5 +1,6 @@
 import BaseComponent from "@/components/BaseComponent/component";
 import { Category } from "@/models/Posts";
+import { isCategory } from "@/utils/category";
 
 export class Tabs extends BaseComponent {
   render() {
@@ -15,8 +16,8 @@ export class Tabs extends BaseComponent {
   setupListener() {
     this.addEventListener("click", (event) => {
       const target = event.target as HTMLElement;
-      const category = target.dataset.category as Category;
-      if (category) {
+      const category = target.dataset.category;
+      if (isCategory(category)) {
         this.updateActiveTab(category);
       }
     });
